@@ -20,6 +20,7 @@
 #include "process.h"
 #include "yalnix.h"
 #include "ylib.h"
+#include "trap.h"
 
 // global_frame_pool is the global frame pool that tracks which frames are free and which are being used
 frame_pool* global_frame_pool;
@@ -30,9 +31,8 @@ pte_t* global_kernel_pagetable;
 // global_kernel_brk is the kernel bkr address
 unsigned int global_kernel_brk = _orig_kernel_brk_page << PAGESHIFT;
 
-// global_virtual_memory_enabled is a boolean variable that states whether virtual memory is enabled or not
-int global_virtual_memory_enabled = 0;
-
+// global_trap_vector is an array of function pointes that will be used
+// as the vector for trap routines
 void (*global_trap_vector[TRAP_VECTOR_SIZE])(UserContext*);
 
 // SetKernelBrk is a system call that the kernel uses to expand the heap to addr
@@ -173,4 +173,7 @@ void KernelStart(char* cmd_args[], unsigned int pmem_size, UserContext* uctxt) {
 
 	// running DoIdle
 	DoIdle();
+
+	return 0;
+	EXIT;
 }

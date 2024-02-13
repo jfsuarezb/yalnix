@@ -17,10 +17,10 @@
 #include "ykernel.h"
 #include "ylib.h"
 
-// vm_enabled is an int value that indicates whether
-// virtual memory is enabled or not. 1 means that its
-// enabled and 0 means that its not enabled
-int vm_enabled = 0;
+// global_virtual_memory_enabled is the flag that
+// indicates that the global virtual memory has been
+// enabled
+int global_virtual_memory_enabled = 0;
 
 // TOTAL_NUM_PAGES is the number of pages available
 // calculated during run time
